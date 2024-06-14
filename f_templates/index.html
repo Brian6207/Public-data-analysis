@@ -1,0 +1,146 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+                <main>
+                    <div class="container-fluid px-4">
+                        <h1 class="mt-4">Dashboard</h1>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item active">Dashboard</li>
+                        </ol>
+                        <div class="row">
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card bg-primary text-white mb-4">
+                                    <div class="card-body">Primary Card</div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                        <a class="small text-white stretched-link" href="#">View Details</a>
+                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card bg-warning text-white mb-4">
+                                    <div class="card-body">Warning Card</div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                        <a class="small text-white stretched-link" href="#">View Details</a>
+                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card bg-success text-white mb-4">
+                                    <div class="card-body">Success Card</div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                        <a class="small text-white stretched-link" href="#">View Details</a>
+                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card bg-danger text-white mb-4">
+                                    <div class="card-body">Danger Card</div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between">
+                                        <a class="small text-white stretched-link" href="#">View Details</a>
+                                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-6">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <i class="fas fa-chart-area me-1"></i>
+                                        平均每人所得(年增率(%))
+                                    </div>
+                                    <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
+                                </div>
+                            </div>
+                            <div class="col-xl-6">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <i class="fas fa-chart-bar me-1"></i>
+                                        國民所得、平均每人所得
+                                    </div>
+                                    <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="fas fa-table me-1"></i>
+                                國民經濟表
+                            </div>
+                            <div class="card-body">
+                                <table id="datatablesSimple">
+                                    <thead>
+                                        <tr>
+                                            <th>統計期</th>
+                                            <th>期中人口(人)</th>
+                                            <th>年增率(%)</th>
+                                            <th>平均匯率(元/美元)</th>
+                                            <th>經濟成長率(%)</th>
+                                            <th>國內生產毛額GDP(名目值，百萬元)</th>
+                                            <th>年增率(%)</th>
+                                            <th>平均每人GDP(名目值，元)</th>
+                                            <th>年增率(%)</th>
+                                            <th>國民所得毛額GNI(名目值，百萬元)</th>
+                                            <th>年增率(%)</th>
+                                            <th>平均每人GNI(名目值，元)</th>
+                                            <th>年增率(%)</th>
+                                            <th>國民所得(名目值，百萬元)</th>
+                                            <th>年增率(%)</th>
+                                            <th>平均每人所得(名目值，元)</th>
+                                            <th>年增率(%)</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>統計期</th>
+                                            <th>期中人口(人)</th>
+                                            <th>年增率(%)</th>
+                                            <th>平均匯率(元/美元)</th>
+                                            <th>經濟成長率(%)</th>
+                                            <th>國內生產毛額GDP(名目值，百萬元)</th>
+                                            <th>年增率(%)</th>
+                                            <th>平均每人GDP(名目值，元)</th>
+                                            <th>年增率(%)</th>
+                                            <th>國民所得毛額GNI(名目值，百萬元)</th>
+                                            <th>年增率(%)</th>
+                                            <th>平均每人GNI(名目值，元)</th>
+                                            <th>年增率(%)</th>
+                                            <th>國民所得(名目值，百萬元)</th>
+                                            <th>年增率(%)</th>
+                                            <th>平均每人所得(名目值，元)</th>
+                                            <th>年增率(%)</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        {% for i in data %}
+                                        <tr>
+                                            <td>{{i.year}}</td>
+                                            <td>{{i.population}}</td>
+                                            <td>{{i.populationGrowth_annualGrowthRate}}</td>
+                                            <td>{{i.AverageExchange_rate}}</td>
+                                            <td>{{i.EconomicGrowth_annualGrowthRate}}</td>
+                                            <td>{{i.Domestic_Grossproduction_GDP_nominalValue_millionYuan}}</td>
+                                            <td>{{i.Domestic_Grossproduction_GDP_annualGrowthRate}}</td>
+                                            <td>{{i.AveragePersonalGDP}}</td>
+                                            <td>{{i.AveragePersonalGDP_rate}}</td>
+                                            <td>{{i.GrossNationalIncomeGNI_nominalValue_millionYuan}}</td>
+                                            <td>{{i.GrossNationalIncomeGNI_annualGrowthRate}}</td>
+                                            <td>{{i.AveragePersonalGNI_nominalValue_millionYuan}}</td>
+                                            <td>{{i.AveragePersonalGNI_rate}}</td>
+                                            <td>{{i.NationalIncome_nominalValue_millionYuan}}</td>
+                                            <td>{{i.NationalIncome_annualGrowthRate}}</td>
+                                            <td>{{i.AverageIncomePerson_nominalValue_millionYuan}}</td>
+                                            <td>{{i.AverageIncomePerson_annualGrowthRate}}</td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+{% endblock %}

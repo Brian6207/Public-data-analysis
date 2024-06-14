@@ -15,8 +15,29 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from mysite import views
+from django.conf import settings
+from django.conf.urls.static import static
+
+admin.site.site_header = "我的私人日記"
+admin.site.site_title = "我的私人日記"
+admin.site.index_title = "我的私人日記後台"
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
-]
+    path('', views.index),
+    path('admin/', admin.site.urls),
+    path('delpost/<int:pid>/<str:del_pass>/', views.delpost),
+    path('list/', views.listing),
+    path('post/', views.posting),
+    path('contact/', views.contact),
+    path('post2db/', views.post2db),
+    path('captcha/', include('captcha.urls')),
+    path('login/', views.login),
+    path('logout/', views.logout),
+    path('userinfo/', views.userinfo),
+    path('post/', views.posting),
+    path('votes/', views.votes),
+    path('plotly/', views.plotly),
+    path('chart3d/', views.chart3d),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
